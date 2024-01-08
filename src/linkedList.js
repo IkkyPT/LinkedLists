@@ -13,6 +13,7 @@ const linkedList = (() => {
             getTail,
             at,
             contains,
+            find,
         };
     }
 
@@ -107,13 +108,28 @@ const linkedList = (() => {
             if(current.value === value){
                 return true;
             } 
-            
-            if (current === this.tail){
-                return false;
-            }
 
             current = current.nextNode;
         }
+
+        return false;
+    }
+
+    // returns the index of the node containing value, or null if not found
+    function find(value) {
+        let index = 0;
+        let current = this.head;
+
+        while(current) {
+            if (current.value === value) {
+                return index;
+            }
+
+            current = current.nextNode;
+            index++;
+        }
+
+        return null;
     }
     
 
@@ -126,7 +142,8 @@ const linkedList = (() => {
         getTail,
         at,
         pop,
-        contains,    
+        contains,
+        find,    
     };
 })();
 
@@ -139,4 +156,5 @@ console.log(linkedList.at(1));
 // console.log(linkedList.pop());
 console.log(linkedList.at(0));
 console.log(linkedList.contains(70));
+console.log(linkedList.find(70));
 
