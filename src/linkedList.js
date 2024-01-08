@@ -15,6 +15,7 @@ const linkedList = (() => {
             contains,
             find,
             toString,
+            insertAt,
         };
     }
 
@@ -133,6 +134,7 @@ const linkedList = (() => {
         return null;
     }
 
+    // represents LinkedList objects as strings, so user can print them out and preview them in the console.
     function toString(){
         let current = this.head;
         let nodeString = "";
@@ -144,6 +146,36 @@ const linkedList = (() => {
 
         nodeString += "null";
         return nodeString;
+    }
+
+    // inserts a new node with the provided value at the given index.
+    function insertAt(value, index){
+        let current = this.head;
+        let trackIndex = 0;
+        let prev = null;
+        const newNode = createNode(value);
+
+        if (index === 0){
+            newNode.nextNode = this.head;
+            this.head = newNode;
+            return;
+        }
+        
+        while(current){
+            if (trackIndex === index){ 
+                newNode.nextNode = current;
+                prev.nextNode = newNode;
+                return;               
+            }
+
+            prev = current;
+            current = current.nextNode;
+            trackIndex++;
+        }
+
+        if (trackIndex === index) {
+            prev.nextNode = newNode;
+        }
     }
     
 
@@ -158,7 +190,8 @@ const linkedList = (() => {
         pop,
         contains,
         find,
-        toString,    
+        toString, 
+        insertAt,   
     };
 })();
 
@@ -174,5 +207,7 @@ console.log(linkedList.at(1));
 console.log(linkedList.at(0));
 console.log(linkedList.contains(66));
 console.log(linkedList.find(66));
+console.log(linkedList.toString());
+console.log(linkedList.insertAt(70, 4));
 console.log(linkedList.toString());
 
