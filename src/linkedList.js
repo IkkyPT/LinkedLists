@@ -73,6 +73,32 @@ const linkedList = (() => {
         return null;
     }
 
+    // removes the last element from the list
+    function pop() {
+        let current = this.head;
+        let prev = null;
+
+        if (!current) {
+            return "Cannot delete. List is empty.";
+        }
+
+        while (current.nextNode) {
+            prev = current;
+            current = current.nextNode;
+        }
+    
+        if (prev) {
+            prev.nextNode = null;
+            this.tail = prev;
+        } else {
+            this.head = null;
+            this.tail = null;
+        }
+    
+        return current.value;
+    }
+    
+
 
 
     return {
@@ -82,7 +108,8 @@ const linkedList = (() => {
         size,
         getHead,
         getTail,
-        at,    
+        at,
+        pop,    
     };
 })();
 
@@ -91,4 +118,7 @@ console.log(linkedList.append(68));
 console.log(linkedList.size());
 console.log(linkedList.getHead());
 console.log(linkedList.getTail());
+console.log(linkedList.at(1));
+console.log(linkedList.pop());
 console.log(linkedList.at(0));
+
