@@ -12,6 +12,7 @@ const linkedList = (() => {
             getHead,
             getTail,
             at,
+            contains,
         };
     }
 
@@ -97,9 +98,24 @@ const linkedList = (() => {
     
         return current.value;
     }
+
+    // returns true if the passed in value is in the list and otherwise returns false.
+    function contains(value) {
+        let current = this.head;
+
+        while(current){
+            if(current.value === value){
+                return true;
+            } 
+            
+            if (current === this.tail){
+                return false;
+            }
+
+            current = current.nextNode;
+        }
+    }
     
-
-
 
     return {
         createLinkedList,
@@ -109,7 +125,8 @@ const linkedList = (() => {
         getHead,
         getTail,
         at,
-        pop,    
+        pop,
+        contains,    
     };
 })();
 
@@ -119,6 +136,7 @@ console.log(linkedList.size());
 console.log(linkedList.getHead());
 console.log(linkedList.getTail());
 console.log(linkedList.at(1));
-console.log(linkedList.pop());
+// console.log(linkedList.pop());
 console.log(linkedList.at(0));
+console.log(linkedList.contains(70));
 
