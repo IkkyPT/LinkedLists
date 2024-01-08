@@ -14,6 +14,7 @@ const linkedList = (() => {
             at,
             contains,
             find,
+            toString,
         };
     }
 
@@ -131,6 +132,19 @@ const linkedList = (() => {
 
         return null;
     }
+
+    function toString(){
+        let current = this.head;
+        let nodeString = "";
+
+        while(current){
+            nodeString += `( ${current.value} ) -> `;
+            current = current.nextNode;
+        }
+
+        nodeString += "null";
+        return nodeString;
+    }
     
 
     return {
@@ -143,18 +157,22 @@ const linkedList = (() => {
         at,
         pop,
         contains,
-        find,    
+        find,
+        toString,    
     };
 })();
 
-console.log(linkedList.prepend(69));
+console.log(linkedList.prepend(67));
+console.log(linkedList.prepend(66));
 console.log(linkedList.append(68));
+console.log(linkedList.append(69));
 console.log(linkedList.size());
 console.log(linkedList.getHead());
 console.log(linkedList.getTail());
 console.log(linkedList.at(1));
 // console.log(linkedList.pop());
 console.log(linkedList.at(0));
-console.log(linkedList.contains(70));
-console.log(linkedList.find(70));
+console.log(linkedList.contains(66));
+console.log(linkedList.find(66));
+console.log(linkedList.toString());
 
