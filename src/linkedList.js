@@ -8,7 +8,7 @@ const linkedList = (() => {
             tail: null,
             append,
             prepend,
-            size,
+            getSize,
             getHead,
             getTail,
             at,
@@ -16,6 +16,7 @@ const linkedList = (() => {
             find,
             toString,
             insertAt,
+            removeAt,
         };
     }
 
@@ -42,7 +43,7 @@ const linkedList = (() => {
     }
 
     // returns the total number of nodes in the list
-    function size() {
+    function getSize() {
         let count = 0;
         let current = this.head;
         while (current) {
@@ -177,13 +178,41 @@ const linkedList = (() => {
             prev.nextNode = newNode;
         }
     }
+
+    // Removes the node at the given index
+    function removeAt(index) {
+        if (index < 0 || index >= this.size()) {
+            console.error("Invalid index for removeAt");
+            return;
+        }
+    
+        let current = this.head;
+        let prev = null;
+    
+        if (index === 0) {
+            this.head = current.nextNode;
+        } else {
+            let currentIndex = 0;
+    
+            while (currentIndex < index) {
+                prev = current;
+                current = current.nextNode;
+                currentIndex++;
+            }
+    
+            prev.nextNode = current.nextNode;
+            if (index === this.size() - 1) {
+                this.tail = prev;
+            }
+        }
+    }
     
 
     return {
         createLinkedList,
         append,
         prepend,
-        size,
+        getSize,
         getHead,
         getTail,
         at,
@@ -191,23 +220,8 @@ const linkedList = (() => {
         contains,
         find,
         toString, 
-        insertAt,   
+        insertAt,
+        removeAt,   
     };
 })();
-
-console.log(linkedList.prepend(67));
-console.log(linkedList.prepend(66));
-console.log(linkedList.append(68));
-console.log(linkedList.append(69));
-console.log(linkedList.size());
-console.log(linkedList.getHead());
-console.log(linkedList.getTail());
-console.log(linkedList.at(1));
-// console.log(linkedList.pop());
-console.log(linkedList.at(0));
-console.log(linkedList.contains(66));
-console.log(linkedList.find(66));
-console.log(linkedList.toString());
-console.log(linkedList.insertAt(70, 4));
-console.log(linkedList.toString());
 
